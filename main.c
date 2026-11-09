@@ -114,6 +114,5 @@ void calculer(double tab_latitudes[], double tab_longitudes[], double tab_altitu
 // Programme principal
 int main()
 {
-
 	return EXIT_SUCCESS;
 }
