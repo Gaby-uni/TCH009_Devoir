@@ -79,4 +79,70 @@ int lire_donnees_gps(char nom_fichier[],
 }
 
 // implementations des fonctions de matrac_lib (c.f. prototype et doc dans matrac_lib.h)
-
+double convertir_en_radian(double angle) {
+	double radian;
+	radian=angle*PI/180;
+	return radian;
+}
+double distance_entre_2_points(double latitude1,
+							   double longitude1,
+							   double latitude2,
+							   double longitude2,
+							   double altidute1,
+							   double altidute2) {
+	double distance;
+	distance=sqrt(pow(latitude2-latitude1,2)+pow(longitude2-longitude1,2)+pow(altidute2-altidute1,2));
+	return distance;
+}
+void afficher_tableau(double tableau[], int nb_valeurs) {
+	for (int i=0;i<nb_valeurs;i++) {
+		printf("%.2lf\n",tableau[i]);
+	}
+}
+double distance_totale(double tab_latitudes[],
+					   double tab_longitudes[],
+					   double tab_altitudes[],
+					   int taille,
+					   int debut,
+					   int fin) {
+	double distance=0;
+	for (int i=debut+1;i<fin;i++) {
+		distance=distance+distance_entre_2_points(tab_latitudes[i-1],
+			tab_longitudes[i-1],tab_latitudes[i],
+			tab_longitudes[i],tab_altitudes[i-1],tab_altitudes[i]);
+	}
+	return distance;
+}
+int minimum_tableau(double tableau[], int taille, double* minimum) {
+	if (taille<=0) {
+		return 0;
+	}
+	*minimum=tableau[0];
+	for (int i=0;i<taille;i++) {
+		if (tableau[i]<*minimum) {
+			*minimum=tableau[i];
+		}
+	}
+	return 1;
+}
+int maximum_tableau(double tableau[], int taille, double*maximum) {
+	if (taille<=0) {
+		return 0;
+	}
+	*maximum=tableau[0];
+	for (int i=0;i<taille;i++) {
+		if (tableau[i]>*maximum) {
+			*maximum=tableau[i];
+		}
+	}
+	return 1;
+}
+double ascension(double tab_altitudes[], int taille) {
+	double ascension=0;
+	for (int i=1;i<taille;i++) {
+		if (tab_altitudes[i]-tab_altitudes[i-1]>0) {
+			ascension=ascension+tab_altitudes[i]-tab_altitudes[i-1];
+		}
+	}
+	return ascension;
+}
