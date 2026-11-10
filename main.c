@@ -114,6 +114,28 @@ void calculer(double tab_latitudes[], double tab_longitudes[], double tab_altitu
 // Programme principal
 int main()
 {
+	int choix = afficher_menu();
 
+	switch (choix) {
+		case 1:
+			charger();
+			break;
+		case 2:
+			afficher();
+			break;
+		case 3:
+			analyser();
+			break;
+		case 4:
+			calculer();
+			break;
+		case 5:
+			break;
+	}
 	return EXIT_SUCCESS;
+}
+
+int charger(double tab_latitudes[], double tab_longitudes[], double tab_altitudes[], int taille_max) {
+
+	lire_donnees_gps();
 }
