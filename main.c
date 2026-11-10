@@ -137,6 +137,7 @@ int main()
 					calculer(tab_latitudes, tab_longitudes, tab_altitudes, taille);
 					break; */
 			case QUITTER:
+				printf("Fin du programme.");
 				break;
 		}
 	} while (choix != QUITTER);
@@ -148,7 +149,10 @@ int charger(double tab_latitudes[], double tab_longitudes[], double tab_altitude
 	char nom_fichier[LONGUEUR_MAX_NOM_FICHIER];
 	printf("Nom du fichier:");
 	scanf("%s", nom_fichier);
+
 	printf("Chargement de fichier %s...", nom_fichier);
-	lire_donnees_gps(nom_fichier, tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
-	return EXIT_SUCCESS;
+
+	int nb_points;
+	nb_points = lire_donnees_gps(nom_fichier, tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
+	return nb_points;
 }
