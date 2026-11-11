@@ -119,23 +119,24 @@ int main()
 	double tab_altitudes[NB_MAX_POINT];
 	int taille_max = NB_MAX_POINT;
 	int choix;
+	int taille = 0;
 
 	do {
 		choix = afficher_menu();
 
 		switch (choix) {
 			case CHARGER:
-				charger(tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
+				taille = charger(tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
 				break;
-				/*case AFFICHER:
-					afficher(tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
-					break;
-				case ANALYSER:
-					analyser(tab_latitudes, tab_longitudes, tab_altitudes, taille);
-					break;
-				case CALCULER:
-					calculer(tab_latitudes, tab_longitudes, tab_altitudes, taille);
-					break; */
+			case AFFICHER:
+				afficher(tab_latitudes, tab_longitudes, tab_altitudes, taille);
+				break;
+			/*case ANALYSER:
+				analyser(tab_latitudes, tab_longitudes, tab_altitudes, taille);
+				break;
+			case CALCULER:
+				calculer(tab_latitudes, tab_longitudes, tab_altitudes, taille);
+				break; */
 			case QUITTER:
 				printf("Fin du programme.");
 				break;
@@ -155,4 +156,12 @@ int charger(double tab_latitudes[], double tab_longitudes[], double tab_altitude
 	int nb_points;
 	nb_points = lire_donnees_gps(nom_fichier, tab_latitudes, tab_longitudes, tab_altitudes, taille_max);
 	return nb_points;
+}
+
+void afficher(double tab_latitudes[], double tab_longitudes[], double tab_altitudes[], int taille) {
+	printf("Donnees en memoire:\n\n");
+	printf("%-5s %-10s %-12s %-10s\n","index","latitude", "longitudes", "altitudes");
+	for (int i = 0; i < taille; i++) {
+		printf("%-5d %-10lf %-12lf %-10lf\n", i, tab_latitudes[i], tab_longitudes[i], tab_altitudes[i]);
+	}
 }
