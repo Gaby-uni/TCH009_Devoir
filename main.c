@@ -131,10 +131,10 @@ int main()
 			case AFFICHER:
 				afficher(tab_latitudes, tab_longitudes, tab_altitudes, taille);
 				break;
-			/*case ANALYSER:
+			case ANALYSER:
 				analyser(tab_latitudes, tab_longitudes, tab_altitudes, taille);
 				break;
-			case CALCULER:
+			/*case CALCULER:
 				calculer(tab_latitudes, tab_longitudes, tab_altitudes, taille);
 				break; */
 			case QUITTER:
@@ -161,7 +161,31 @@ int charger(double tab_latitudes[], double tab_longitudes[], double tab_altitude
 void afficher(double tab_latitudes[], double tab_longitudes[], double tab_altitudes[], int taille) {
 	printf("Donnees en memoire:\n\n");
 	printf("%-5s %-10s %-12s %-10s\n","index","latitude", "longitudes", "altitudes");
+	//afficher_tableau(); ???????
 	for (int i = 0; i < taille; i++) {
 		printf("%-5d %-10lf %-12lf %-10lf\n", i, tab_latitudes[i], tab_longitudes[i], tab_altitudes[i]);
 	}
+}
+
+void analyser(double tab_latitudes[], double tab_longitudes[], double tab_altitudes[], int taille) {
+	double altitude_minimale;
+	minimum_tableau(tab_altitudes, taille, &altitude_minimale);
+
+	double altitude_maximale;
+	maximum_tableau(tab_altitudes, taille, &altitude_maximale);
+
+	double ascension_total = ascension(tab_altitudes, taille);
+
+	int debut = 0; //C quoi debut ??????
+	double distance_totale_parcourue = distance_totale(tab_latitudes,
+														tab_longitudes,
+														tab_altitudes,
+														taille,
+														debut,
+														taille);
+
+	printf("Analyse de la trace ...\n\n"
+			"Altitude minimale: %.3lf m\nAltitude maximale: %.3lf m\n"
+			"Ascension: %.3lf m\nDistance parcourue: %.3lf km\n",
+			altitude_minimale,altitude_maximale,ascension_total,distance_totale_parcourue);
 }
